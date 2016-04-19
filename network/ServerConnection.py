@@ -1,21 +1,20 @@
 import SocketServer
 import threading
+from BusinessLogic import BusinessLogic
 class ServerConnection(SocketServer.StreamRequestHandler):
 
     def handle(self):
+        print "STARTING"
         # self.rfile is a file-like object created by the handler;
         # we can now use e.g. readline() instead of raw recv() calls
+        while True:
 
-        data = self.rfile.readline().strip()
-        result = self.parse_message(data)
+            data = self.rfile.readline().strip()
+            if not data:
+                # EOF, client closed, just return
+                return
+            result = BusinessLogic.handle_message(data)
+            print "Writing %s" % result
+            self.wfile.write(result)
+            self.wfile.flush()
 
-        self.wfile.write(result)
-
-    def parse_message(self, buffer):
-        buffer_parts = buffer.split("|")
-        try:
-            if len(buffer_parts) != 3:
-                raise Exception("Syntax Error")
-            verb, package_name, deps = buffer_parts
-        except Exception, ex:
-            return "ERROR\n"
