@@ -52,11 +52,13 @@ class MemStorage(GenericStorage):
 
     def check_many_exist(self, packages):
         self.write_lock.acquire()
+        result = True
         for package in packages:
-            if not package in self.storage:
-                return False
+            if package not in self.storage:
+                result = False
+                break
         self.write_lock.release()
-        return True
+        return result
 
     def check_dependents(self, package):
         self.write_lock.acquire()
