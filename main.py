@@ -19,7 +19,7 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 
 if __name__ == '__main__':
-    address = ('localhost', 8080)
+    address = ('', 8080)
     business_logic = BusinessLogic(storage_layer=MemStorage())
     # All we have to do is to start the server
     server = Listener(address, ServerConnection, bind_and_activate=False)
