@@ -6,6 +6,11 @@ Running the code:
     run python main.py
     ctrl-c to exit
 
+Docker:
+    build a machine with the docker file. the code will be located under /root/do-backend-repo
+    the test executables will be under /root/package_contents
+    The container will run the server by default (just make sure the network is set up)
+
 Testing the code:
     Two options:
     1. run python -m unittest discover from the command line inside the project root directory
