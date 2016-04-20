@@ -54,5 +54,5 @@ class LineProtocol(object):
                 return "FAIL\n"
 
         except Exception, ex:
-            logger.exception("error %s" % buffer)
+            logger.exception("error %s" % message_buffer)
             return "ERROR\n"
