@@ -1,5 +1,4 @@
 import SocketServer
-from BusinessLogic import BusinessLogic
 
 class ServerConnection(SocketServer.StreamRequestHandler):
     """
@@ -18,7 +17,7 @@ class ServerConnection(SocketServer.StreamRequestHandler):
                 # EOF, client closed, just return
                 return
             #Sending the message to the protocol interpreter
-            result = BusinessLogic.handle_message(data)
+            result = self.server.protocol_handler.handle_message(data)
             #Sending the result back to the client
             self.wfile.write(result)
             self.wfile.flush()
